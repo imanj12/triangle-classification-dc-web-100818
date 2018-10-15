@@ -14,22 +14,14 @@ class Triangle
     is_true ||= side2 <= 0
     is_true ||= side3 <= 0
     if is_true == true
-      # begin
-        raise TriangleError
-      # rescue TriangleError => error
-        # puts error.zerosides
-      # end
+      raise TriangleError, "Triangle sides cannot be equal to or less than 0!"
     end
 
     # check for triangle inequality
     sorted = [@side1,@side2,@side3].sort
     greatest_side = sorted.pop
     if greatest_side < sorted.inject(0) { |zero, side| zero + side } == false
-      # begin
-        raise TriangleError
-      # rescue TriangleError => error
-        # puts error.inequality
-      # end
+      raise TriangleError, "Chosen side lengths violate triangle inequality!"
     end
 
     #assuming above two pass, run triangle type tests below
@@ -52,14 +44,6 @@ class Triangle
   end
 
   class TriangleError < StandardError
-    def zerosides
-      puts "Triangle sides cannot be equal to or less than 0!"
-    end
-
-    def inequality
-      puts "Chosen side lengths violate triangle inequality!"
-    end
-
   end
 
 end
